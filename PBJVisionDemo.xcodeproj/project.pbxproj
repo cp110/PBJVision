@@ -17,7 +17,16 @@
 		84396BF92180D62C00962959 /* PBJStrobeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84396BF42180D62C00962959 /* PBJStrobeView.m */; };
 		84396BFA2180D62C00962959 /* PBJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84396BF62180D62C00962959 /* PBJViewController.m */; };
 		84396BFB2180D62C00962959 /* PBJFocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84396BF82180D62C00962959 /* PBJFocusView.m */; };
-		84B19CC62180DAA4005464F6 /* Source in Resources */ = {isa = PBXBuildFile; fileRef = 84B19CC52180DAA4005464F6 /* Source */; };
+		84FEADE12180DBF90090A0D2 /* PBJGLProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FEADD92180DBF80090A0D2 /* PBJGLProgram.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84FEADE22180DBF90090A0D2 /* PBJVision.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEADDA2180DBF80090A0D2 /* PBJVision.m */; };
+		84FEADE32180DBF90090A0D2 /* PBJVisionUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FEADDB2180DBF80090A0D2 /* PBJVisionUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84FEADE42180DBF90090A0D2 /* PBJGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEADDC2180DBF80090A0D2 /* PBJGLProgram.m */; };
+		84FEADE52180DBF90090A0D2 /* PBJMediaWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEADDD2180DBF80090A0D2 /* PBJMediaWriter.m */; };
+		84FEADE62180DBF90090A0D2 /* PBJVisionUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEADDE2180DBF80090A0D2 /* PBJVisionUtilities.m */; };
+		84FEADE72180DBF90090A0D2 /* PBJMediaWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FEADDF2180DBF80090A0D2 /* PBJMediaWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84FEADE82180DBF90090A0D2 /* PBJVision.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FEADE02180DBF90090A0D2 /* PBJVision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84FEADEB2180DC0A0090A0D2 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 84FEADE92180DC0A0090A0D2 /* Shader.fsh */; };
+		84FEADEC2180DC0A0090A0D2 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 84FEADEA2180DC0A0090A0D2 /* Shader.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +70,16 @@
 		84396BF62180D62C00962959 /* PBJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBJViewController.m; sourceTree = "<group>"; };
 		84396BF72180D62C00962959 /* PBJFocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBJFocusView.h; sourceTree = "<group>"; };
 		84396BF82180D62C00962959 /* PBJFocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBJFocusView.m; sourceTree = "<group>"; };
-		84B19CC52180DAA4005464F6 /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = SOURCE_ROOT; };
+		84FEADD92180DBF80090A0D2 /* PBJGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBJGLProgram.h; path = Source/PBJGLProgram.h; sourceTree = SOURCE_ROOT; };
+		84FEADDA2180DBF80090A0D2 /* PBJVision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBJVision.m; path = Source/PBJVision.m; sourceTree = SOURCE_ROOT; };
+		84FEADDB2180DBF80090A0D2 /* PBJVisionUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBJVisionUtilities.h; path = Source/PBJVisionUtilities.h; sourceTree = SOURCE_ROOT; };
+		84FEADDC2180DBF80090A0D2 /* PBJGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBJGLProgram.m; path = Source/PBJGLProgram.m; sourceTree = SOURCE_ROOT; };
+		84FEADDD2180DBF80090A0D2 /* PBJMediaWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBJMediaWriter.m; path = Source/PBJMediaWriter.m; sourceTree = SOURCE_ROOT; };
+		84FEADDE2180DBF80090A0D2 /* PBJVisionUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBJVisionUtilities.m; path = Source/PBJVisionUtilities.m; sourceTree = SOURCE_ROOT; };
+		84FEADDF2180DBF80090A0D2 /* PBJMediaWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBJMediaWriter.h; path = Source/PBJMediaWriter.h; sourceTree = SOURCE_ROOT; };
+		84FEADE02180DBF90090A0D2 /* PBJVision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBJVision.h; path = Source/PBJVision.h; sourceTree = SOURCE_ROOT; };
+		84FEADE92180DC0A0090A0D2 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Source/Shaders/Shader.fsh; sourceTree = SOURCE_ROOT; };
+		84FEADEA2180DC0A0090A0D2 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Source/Shaders/Shader.vsh; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +141,17 @@
 		84396BD22180D47200962959 /* PBJVisionOC */ = {
 			isa = PBXGroup;
 			children = (
-				84B19CC52180DAA4005464F6 /* Source */,
 				84396BD32180D47200962959 /* PBJVisionOC.h */,
+				84FEADD92180DBF80090A0D2 /* PBJGLProgram.h */,
+				84FEADDC2180DBF80090A0D2 /* PBJGLProgram.m */,
+				84FEADDF2180DBF80090A0D2 /* PBJMediaWriter.h */,
+				84FEADDD2180DBF80090A0D2 /* PBJMediaWriter.m */,
+				84FEADE02180DBF90090A0D2 /* PBJVision.h */,
+				84FEADDA2180DBF80090A0D2 /* PBJVision.m */,
+				84FEADDB2180DBF80090A0D2 /* PBJVisionUtilities.h */,
+				84FEADDE2180DBF80090A0D2 /* PBJVisionUtilities.m */,
+				84FEADE92180DC0A0090A0D2 /* Shader.fsh */,
+				84FEADEA2180DC0A0090A0D2 /* Shader.vsh */,
 				84396BD42180D47200962959 /* Info.plist */,
 			);
 			path = PBJVisionOC;
@@ -138,6 +165,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				84396BD52180D47200962959 /* PBJVisionOC.h in Headers */,
+				84FEADE82180DBF90090A0D2 /* PBJVision.h in Headers */,
+				84FEADE32180DBF90090A0D2 /* PBJVisionUtilities.h in Headers */,
+				84FEADE72180DBF90090A0D2 /* PBJMediaWriter.h in Headers */,
+				84FEADE12180DBF90090A0D2 /* PBJGLProgram.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +262,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84B19CC62180DAA4005464F6 /* Source in Resources */,
+				84FEADEC2180DC0A0090A0D2 /* Shader.vsh in Resources */,
+				84FEADEB2180DC0A0090A0D2 /* Shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +286,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FEADE52180DBF90090A0D2 /* PBJMediaWriter.m in Sources */,
+				84FEADE42180DBF90090A0D2 /* PBJGLProgram.m in Sources */,
+				84FEADE22180DBF90090A0D2 /* PBJVision.m in Sources */,
+				84FEADE62180DBF90090A0D2 /* PBJVisionUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
