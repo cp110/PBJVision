@@ -141,7 +141,6 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 @property (nonatomic, weak, nullable) id<PBJVisionDelegate> delegate;
 
 // session
-@property (strong, nonatomic, readonly) AVCaptureSession *captureSession;
 
 @property (nonatomic, readonly, getter=isCaptureSessionActive) BOOL captureSessionActive;
 
@@ -160,6 +159,8 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 @property (nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable;
 
 @property (nonatomic) PBJMirroringMode mirroringMode;
+
+@property(nonatomic, copy, null_resettable) NSArray<AVMetadataObjectType> *metadataObjectTypes;
 
 // video output settings
 
@@ -316,6 +317,8 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 
 - (void)vision:(PBJVision *)vision didCaptureVideoSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 - (void)vision:(PBJVision *)vision didCaptureAudioSample:(CMSampleBufferRef)sampleBuffer;
+
+- (void)vision:(PBJVision *)vision didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects;
 
 NS_ASSUME_NONNULL_END
 

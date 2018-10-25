@@ -375,6 +375,7 @@ static NSString * const PBJViewControllerPhotoAlbum = @"PBJVision";
     vision.videoRenderingEnabled = YES;
     vision.additionalCompressionProperties = @{AVVideoProfileLevelKey : AVVideoProfileLevelH264Baseline30}; // AVVideoProfileLevelKey requires specific captureSessionPreset
     
+    vision.metadataObjectTypes = @[AVMetadataObjectTypeFace];
     // specify a maximum duration with the following property
     // vision.maximumCaptureDuration = CMTimeMakeWithSeconds(5, 600); // ~ 5 seconds
 }
@@ -709,6 +710,10 @@ static NSString * const PBJViewControllerPhotoAlbum = @"PBJVision";
 - (void)vision:(PBJVision *)vision didCaptureAudioSample:(CMSampleBufferRef)sampleBuffer
 {
 //    NSLog(@"captured video (%f) seconds", vision.capturedVideoSeconds);
+}
+
+- (void)vision:(PBJVision *)vision didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects {
+    NSLog(@"-------------------------------%ld", metadataObjects.count);
 }
 
 @end

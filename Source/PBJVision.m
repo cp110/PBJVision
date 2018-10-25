@@ -89,12 +89,13 @@ typedef NS_ENUM(GLint, PBJVisionUniformLocationTypes)
 @interface PBJVision () <
     AVCaptureAudioDataOutputSampleBufferDelegate,
     AVCaptureVideoDataOutputSampleBufferDelegate,
+    AVCaptureMetadataOutputObjectsDelegate,
     AVCapturePhotoCaptureDelegate,
     PBJMediaWriterDelegate>
 {
     // AV
 
-//    AVCaptureSession *_captureSession;
+    AVCaptureSession *_captureSession;
     
     AVCaptureDevice *_captureDeviceFront;
     AVCaptureDevice *_captureDeviceBack;
@@ -108,6 +109,7 @@ typedef NS_ENUM(GLint, PBJVisionUniformLocationTypes)
     AVCaptureStillImageOutput *_captureOutputImage;
     AVCaptureAudioDataOutput *_captureOutputAudio;
     AVCaptureVideoDataOutput *_captureOutputVideo;
+    AVCaptureMetadataOutput *_captureOutputMetadata;
 
     // vision core
 
@@ -845,6 +847,9 @@ typedef void (^PBJVisionBlock)();
         [_captureOutputAudio setSampleBufferDelegate:self queue:_captureCaptureDispatchQueue];
     }
     [_captureOutputVideo setSampleBufferDelegate:self queue:_captureCaptureDispatchQueue];
+    
+    _captureOutputMetadata = [AVCaptureMetadataOutput new];
+    [_captureOutputMetadata setMetadataObjectsDelegate:self queue:_captureCaptureDispatchQueue];
 
     // capture device initial settings
     _videoFrameRate = 30;
@@ -922,6 +927,7 @@ typedef void (^PBJVisionBlock)();
     _captureOutputImage = nil;
     _captureOutputAudio = nil;
     _captureOutputVideo = nil;
+    _captureOutputMetadata = nil;
     
     _captureDeviceAudio = nil;
     _captureDeviceInputAudio = nil;
@@ -971,6 +977,7 @@ typedef void (^PBJVisionBlock)();
     
     AVCaptureDeviceInput *newDeviceInput = nil;
     AVCaptureOutput *newCaptureOutput = nil;
+    AVCaptureOutput *newCaptureMetadataOutput = nil;
     AVCaptureDevice *newCaptureDevice = nil;
     
     [_captureSession beginConfiguration];
@@ -1037,6 +1044,7 @@ typedef void (^PBJVisionBlock)();
         }
         
         [_captureSession removeOutput:_captureOutputVideo];
+        [_captureSession removeOutput:_captureOutputMetadata];
         
         if ([AVCapturePhotoOutput class]) {
             [_captureSession removeOutput:_captureOutputPhoto];
@@ -1061,6 +1069,12 @@ typedef void (^PBJVisionBlock)();
                     [_captureSession addOutput:_captureOutputVideo];
                     newCaptureOutput = _captureOutputVideo;
                 }
+                // metadata output
+                if ([_captureSession canAddOutput:_captureOutputMetadata]) {
+                    [_captureSession addOutput:_captureOutputMetadata];
+                    newCaptureMetadataOutput = _captureOutputMetadata;
+                }
+                
                 break;
             }
             case PBJCameraModePhoto:
@@ -1083,10 +1097,14 @@ typedef void (^PBJVisionBlock)();
 
     if (!newCaptureOutput)
         newCaptureOutput = _currentOutput;
+    
+    if (!newCaptureMetadataOutput) {
+        newCaptureMetadataOutput = _currentOutput;
+    }
 
     // setup video connection
     AVCaptureConnection *videoConnection = [_captureOutputVideo connectionWithMediaType:AVMediaTypeVideo];
-    
+   
     // setup input/output
     
     NSString *sessionPreset = _captureSessionPreset;
@@ -1173,7 +1191,25 @@ typedef void (^PBJVisionBlock)();
         }
             
     }
-
+    
+    //
+    AVCaptureConnection *metadataConnection = [_captureOutputMetadata connectionWithMediaType:AVMediaTypeVideo];
+    if (newCaptureMetadataOutput && (newCaptureMetadataOutput == _captureOutputMetadata) && metadataConnection) {
+        // setup video orientation
+        [self _setOrientationForConnection:metadataConnection];
+        
+        // setup video stabilization, if available
+        if ([metadataConnection isVideoStabilizationSupported]) {
+            if ([metadataConnection respondsToSelector:@selector(setPreferredVideoStabilizationMode:)]) {
+                [metadataConnection setPreferredVideoStabilizationMode:AVCaptureVideoStabilizationModeAuto];
+            }
+        }
+    }
+    
+    if (_metadataObjectTypes && _captureOutputMetadata) {
+        _captureOutputMetadata.metadataObjectTypes = _metadataObjectTypes;
+    }
+    
     // apply presets
     if ([_captureSession canSetSessionPreset:sessionPreset])
         [_captureSession setSessionPreset:sessionPreset];
@@ -1818,6 +1854,9 @@ typedef void (^PBJVisionBlock)();
 
         AVCaptureConnection *videoConnection = [_captureOutputVideo connectionWithMediaType:AVMediaTypeVideo];
         [self _setOrientationForConnection:videoConnection];
+        
+        AVCaptureConnection *metadataConnection = [_captureOutputMetadata connectionWithMediaType:AVMediaTypeVideo];
+        [self _setOrientationForConnection:metadataConnection];
 
         _startTimestamp = CMClockGetTime(CMClockGetHostTimeClock());
         _timeOffset = kCMTimeInvalid;
@@ -2313,6 +2352,14 @@ previewPhotoSampleBuffer:(CMSampleBufferRef)previewPhotoSampleBuffer
     
     CFRelease(sampleBuffer);
 
+}
+
+- (void)captureOutput:(AVCaptureOutput *)output didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    if ([_delegate respondsToSelector:@selector(vision:didOutputMetadataObjects:)]) {
+        [self _enqueueBlockOnMainQueue:^{
+            [_delegate vision:self didOutputMetadataObjects:metadataObjects];
+        }];
+    }
 }
 
 #pragma mark - App NSNotifications
