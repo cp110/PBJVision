@@ -94,7 +94,7 @@ typedef NS_ENUM(GLint, PBJVisionUniformLocationTypes)
 {
     // AV
 
-    AVCaptureSession *_captureSession;
+//    AVCaptureSession *_captureSession;
     
     AVCaptureDevice *_captureDeviceFront;
     AVCaptureDevice *_captureDeviceBack;

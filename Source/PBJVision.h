@@ -141,6 +141,7 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 @property (nonatomic, weak, nullable) id<PBJVisionDelegate> delegate;
 
 // session
+@property (strong, nonatomic, readonly) AVCaptureSession *captureSession;
 
 @property (nonatomic, readonly, getter=isCaptureSessionActive) BOOL captureSessionActive;
 
